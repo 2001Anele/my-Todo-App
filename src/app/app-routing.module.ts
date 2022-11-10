@@ -42,7 +42,11 @@ const routes: Routes = [
   {
     path: 'taskdetails',
     loadChildren: () => import('./screens/taskdetails/taskdetails.module').then( m => m.TaskdetailsPageModule)
+  },  {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   }
+
 ];
 @NgModule({
   imports: [

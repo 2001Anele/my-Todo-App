@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth'
 
 @Component({
   selector: 'app-signup',
@@ -8,18 +10,38 @@ import { ToastController } from '@ionic/angular';
 })
 export class SignupPage implements OnInit {
 
-  constructor(private toast: ToastController) { }
+email:any;
+pass:any; 
+
+  constructor(private router:Router, private auth:AngularFireAuth) {} 
 
   ngOnInit() {
-    this.showToast;
+   
   }
-  showToast(messege: string)
-  {
-    this.toast.create({
-      message: "Welcome to your application",
-      duration: 3000,
-      position: "top",
+  
 
-    }).then((toastData) => toastData.present())
+  reg(){
+  this.email=((document.getElementById("email") as HTMLInputElement).value);
+  this.pass=((document.getElementById("password") as HTMLInputElement).value);
+
+    this.auth.
+    createUserWithEmailAndPassword(this.email, this.pass)
+      .then(userCredential => {
+       
+        if(userCredential.user){
+          window.alert("Signed Up");
+          this.router.navigateByUrl('/login');
+
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        window.alert(errorMessage);
+      });
+
   }
 }
+
+
+
