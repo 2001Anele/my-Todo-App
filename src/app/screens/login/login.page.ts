@@ -24,8 +24,8 @@ log(){
       .then(userCredential => {
        
         if(userCredential.user){
-          window.alert("Signed Up");
-          this.router.navigateByUrl('/login');
+          window.alert("Logged In");
+          this.router.navigateByUrl('/tasks');
 
         }
       })
@@ -38,7 +38,7 @@ log(){
   }
 
   move(){
-
+    this.router.navigateByUrl("/forgot-password");
 
   }
 
